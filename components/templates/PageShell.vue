@@ -1,7 +1,5 @@
-<script lang="ts">
+<script lang="ts" setup>
 import './style.css';
-
-export default {};
 </script>
 
 <template>
