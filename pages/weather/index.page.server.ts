@@ -25,8 +25,16 @@ export async function onBeforeRender(pageContext: PageContextServer) {
     }
 
     const [weatherResponse, sunriseResponse] = await Promise.all([
-        axios.get(`https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`),
-        axios.get(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${latitude}&lon=${longitude}&date=2023-03-07&offset=00:00`),
+        axios.get(`https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`, {
+            headers: {
+                'User-Agent': 'notion-tools'
+            }
+        }),
+        axios.get(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${latitude}&lon=${longitude}&date=2023-03-07&offset=00:00`, {
+            headers: {
+                'User-Agent': 'notion-tools'
+            }
+        }),
     ])
 
     const weather: WeatherDto = await weatherResponse.data
