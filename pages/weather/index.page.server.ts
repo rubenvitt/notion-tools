@@ -7,7 +7,8 @@ export async function onBeforeRender(pageContext: PageContextServer) {
     // get from query
     const latitude = pageContext.query?.lat
     const longitude = pageContext.query?.lon
-    console.log(`query: ${pageContext.query}}`)
+    console.log(`query: ${pageContext.query}`)
+    console.log(`page context: ${pageContext}`)
 
     if (!latitude || !longitude) {
 
