@@ -2,8 +2,9 @@
 
 import express from 'express'
 import compression from 'compression'
-import { renderPage } from 'vite-plugin-ssr'
-import { root } from './root.js'
+import {renderPage} from 'vite-plugin-ssr'
+import {root} from './root.js'
+
 const isProduction = process.env.NODE_ENV === 'production'
 
 startServer()
@@ -29,7 +30,8 @@ async function startServer() {
 
   app.get('*', async (req, res, next) => {
     const pageContextInit = {
-      urlOriginal: req.originalUrl
+      urlOriginal: req.originalUrl,
+      query: req.query
     }
     const pageContext = await renderPage(pageContextInit)
     const { httpResponse } = pageContext
