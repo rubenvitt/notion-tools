@@ -1,1 +1,1 @@
-export default '/weather/@lat/@lon'
+export default '/weather/@city/@lat/@lon'

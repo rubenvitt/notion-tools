@@ -6,6 +6,7 @@ import axios from "axios";
 export async function onBeforeRender(pageContext: PageContextServer) {
 
     // get from query
+    const city = pageContext.routeParams.city
     const latitude = pageContext.routeParams.lat
     const longitude = pageContext.routeParams.lon
 
@@ -40,7 +41,7 @@ export async function onBeforeRender(pageContext: PageContextServer) {
     const weather: WeatherDto = await weatherResponse.data
     const sunrise: SunriseDto = await sunriseResponse.data
 
-    const pageProps = {weather, sunrise}
+    const pageProps = {weather, sunrise, city}
     return {
         pageContext: {
             pageProps

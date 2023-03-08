@@ -3,7 +3,7 @@ export interface WeatherDto {
     geometry: Coordinates;
     properties: {
         meta: Meta;
-        timeseries: Timeseries[];
+        timeseries: ForecastData[];
     };
 }
 
@@ -67,7 +67,7 @@ interface TimeseriesData {
     };
 }
 
-interface Timeseries {
+export interface ForecastData {
     time: string;
     data: TimeseriesData;
 }
