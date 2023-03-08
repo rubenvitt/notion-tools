@@ -40,3 +40,4 @@ export async function onBeforeRender(pageContext: PageContextServer) {
 }
 
 export const passToClient = ['pageProps']
+export const doNotPrerender = true
