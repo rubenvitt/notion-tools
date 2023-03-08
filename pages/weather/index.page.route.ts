@@ -1,0 +1,1 @@
+export default '/weather/@lat/@lon'

@@ -5,10 +5,8 @@ import {SunriseDto} from "../../types/sunrise";
 export async function onBeforeRender(pageContext: PageContextServer) {
 
     // get from query
-    const latitude = pageContext.query?.lat
-    const longitude = pageContext.query?.lon
-    console.log(`query: ${pageContext.query}`)
-    console.log(`page context: ${JSON.stringify(pageContext)}`)
+    const latitude = pageContext.routeParams.lat
+    const longitude = pageContext.routeParams.lon
 
     if (!latitude || !longitude) {
 
@@ -42,4 +40,3 @@ export async function onBeforeRender(pageContext: PageContextServer) {
 }
 
 export const passToClient = ['pageProps']
-export const doNotPrerender = true

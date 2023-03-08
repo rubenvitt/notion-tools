@@ -55,6 +55,16 @@ const sunrise: SunriseDto = pageProps.sunrise
             {{ moment(sunrise.location.time[0].sunset.time).format('HH:mm') }}</p>
         </div>
       </div>
+
+      <!-- latitute and longitude -->
+      <div class="mt-4">
+        <p class="text-sm text-gray-600 leading-normal">Latitude</p>
+        <p class="text-base text-gray-900 leading-normal">
+          {{ weather.geometry.coordinates[1] }}</p>
+        <p class="text-sm text-gray-600 leading-normal">Longitude</p>
+        <p class="text-base text-gray-900 leading-normal">
+          {{ weather.geometry.coordinates[0] }}</p>
+      </div>
     </div>
   </div>
   <div v-else>
