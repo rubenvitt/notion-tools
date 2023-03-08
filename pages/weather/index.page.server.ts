@@ -5,8 +5,8 @@ import {SunriseDto} from "../../types/sunrise";
 export async function onBeforeRender(pageContext: PageContextServer) {
 
     // get from query
-    const latitude = pageContext.query.lat
-    const longitude = pageContext.query.lon
+    const latitude = pageContext.query?.lat
+    const longitude = pageContext.query?.lon
 
     if (!latitude || !longitude) {
 
