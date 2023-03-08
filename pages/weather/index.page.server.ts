@@ -1,6 +1,7 @@
 import {PageContextServer} from "../../renderer/types";
 import {WeatherDto} from "../../types/complete-weather";
 import {SunriseDto} from "../../types/sunrise";
+import axios from "axios";
 
 export async function onBeforeRender(pageContext: PageContextServer) {
 
@@ -24,12 +25,12 @@ export async function onBeforeRender(pageContext: PageContextServer) {
     }
 
     const [weatherResponse, sunriseResponse] = await Promise.all([
-        fetch(`https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`),
-        fetch(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${latitude}&lon=${longitude}&date=2023-03-07&offset=00:00`),
+        axios.get(`https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`),
+        axios.get(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${latitude}&lon=${longitude}&date=2023-03-07&offset=00:00`),
     ])
 
-    const weather: WeatherDto = await weatherResponse.json()
-    const sunrise: SunriseDto = await sunriseResponse.json()
+    const weather: WeatherDto = await weatherResponse.data
+    const sunrise: SunriseDto = await sunriseResponse.data
 
     const pageProps = {weather, sunrise}
     return {
