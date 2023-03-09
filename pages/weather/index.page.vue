@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {ForecastData, WeatherDto} from "../../types/complete-weather";
 import {SunriseDto} from "../../types/sunrise";
-import moment from "moment";
+import moment, {Moment} from "moment";
 
 const {sunrise, weather, city} = defineProps<{ city: string, weather: WeatherDto, sunrise: SunriseDto }>()
 
@@ -15,14 +15,14 @@ interface WeatherData {
 }
 
 interface DailyWeatherData {
-  date: Date;
+  date: Moment;
   data: WeatherData;
 }
 
 const dailyWeatherData: DailyWeatherData[] = [];
 weather.properties.timeseries.forEach((data: ForecastData) => {
-  const date = new Date(data.time);
-  if (date.getHours() === 12 && dailyWeatherData.length < MAX_DAYS) {
+  const date = moment(data.time).utc(false)
+  if (date.hour() === 12 && dailyWeatherData.length < MAX_DAYS) {
     const weatherData: WeatherData = {
       air_temperature_max: data.data.next_6_hours?.details?.air_temperature_max ?? data.data.instant.details!!.air_temperature!!,
       air_temperature_min: data.data.next_6_hours?.details?.air_temperature_min ?? data.data.instant.details!!.air_temperature!!,
