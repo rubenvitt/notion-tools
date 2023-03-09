@@ -1,14 +1,14 @@
 import {PageContextServer} from "../../renderer/types";
 import {WeatherDto} from "../../types/complete-weather";
 import {SunriseDto} from "../../types/sunrise";
+import axios from "axios";
 
 export async function onBeforeRender(pageContext: PageContextServer) {
 
     // get from query
-    const latitude = pageContext.query?.lat
-    const longitude = pageContext.query?.lon
-    console.log(`query: ${pageContext.query}`)
-    console.log(`page context: ${pageContext}`)
+    const city = pageContext.routeParams.city
+    const latitude = pageContext.routeParams.lat
+    const longitude = pageContext.routeParams.lon
 
     if (!latitude || !longitude) {
 
@@ -26,14 +26,22 @@ export async function onBeforeRender(pageContext: PageContextServer) {
     }
 
     const [weatherResponse, sunriseResponse] = await Promise.all([
-        fetch(`https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`),
-        fetch(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${latitude}&lon=${longitude}&date=2023-03-07&offset=00:00`),
+        axios.get(`https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${latitude}&lon=${longitude}`, {
+            headers: {
+                'User-Agent': 'notion-tools'
+            }
+        }),
+        axios.get(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${latitude}&lon=${longitude}&date=2023-03-07&offset=00:00`, {
+            headers: {
+                'User-Agent': 'notion-tools'
+            }
+        }),
     ])
 
-    const weather: WeatherDto = await weatherResponse.json()
-    const sunrise: SunriseDto = await sunriseResponse.json()
+    const weather: WeatherDto = await weatherResponse.data
+    const sunrise: SunriseDto = await sunriseResponse.data
 
-    const pageProps = {weather, sunrise}
+    const pageProps = {weather, sunrise, city}
     return {
         pageContext: {
             pageProps
@@ -42,4 +50,3 @@ export async function onBeforeRender(pageContext: PageContextServer) {
 }
 
 export const passToClient = ['pageProps']
-export const doNotPrerender = true
