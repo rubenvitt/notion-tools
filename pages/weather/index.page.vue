@@ -5,6 +5,8 @@ import moment from "moment";
 
 const {sunrise, weather, city} = defineProps<{ city: string, weather: WeatherDto, sunrise: SunriseDto }>()
 
+const MAX_DAYS = 5;
+
 interface WeatherData {
   air_temperature_max: number;
   air_temperature_min: number;
@@ -20,7 +22,7 @@ interface DailyWeatherData {
 const dailyWeatherData: DailyWeatherData[] = [];
 weather.properties.timeseries.forEach((data: ForecastData) => {
   const date = new Date(data.time);
-  if (date.getHours() === 12 && dailyWeatherData.length < 3) {
+  if (date.getHours() === 12 && dailyWeatherData.length < MAX_DAYS) {
     const weatherData: WeatherData = {
       air_temperature_max: data.data.next_6_hours?.details?.air_temperature_max ?? data.data.instant.details!!.air_temperature!!,
       air_temperature_min: data.data.next_6_hours?.details?.air_temperature_min ?? data.data.instant.details!!.air_temperature!!,
