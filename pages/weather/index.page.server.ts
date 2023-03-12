@@ -9,7 +9,7 @@ export async function onBeforeRender(pageContext: PageContextServer) {
     const city = pageContext.routeParams.city
     const latitude = pageContext.routeParams.lat
     const longitude = pageContext.routeParams.lon
-    const search = pageContext.urlParsed.search
+    const search = pageContext.urlParsed
 
     if (!latitude || !longitude) {
 
