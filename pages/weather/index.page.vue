@@ -3,7 +3,7 @@ import {ForecastData, WeatherDto} from "../../types/complete-weather";
 import {SunriseDto} from "../../types/sunrise";
 import moment, {Moment} from "moment";
 
-const {sunrise, weather, city} = defineProps<{ city: string, weather: WeatherDto, sunrise: SunriseDto }>()
+const {sunrise, weather, city} = defineProps<{ city: string, weather: WeatherDto, sunrise: SunriseDto, search: any }>()
 
 const MAX_DAYS = 5;
 
@@ -36,7 +36,9 @@ weather.properties.timeseries.forEach((data: ForecastData) => {
 </script>
 
 <template>
-  <!-- use template from above -->
+  <div>
+    {{ JSON.stringify(search) }}
+  </div>
   <div v-if="weather && sunrise">
     <div class="flex mt-4 mb-2">
       <div class="flex-1">

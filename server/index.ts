@@ -31,13 +31,19 @@ async function startServer() {
   app.get('*', async (req, res, next) => {
     const pageContextInit = {
       urlOriginal: req.originalUrl,
-      query: req.query
+      query: req.query,
+      params: req.params,
     }
+    console.log("req.params, req.query, req.url", req.params, req.query, req.url)
     const pageContext = await renderPage(pageContextInit)
-    const { httpResponse } = pageContext
+    console.log("pageContext.params", pageContext.params)
+    // @ts-ignore
+    const {urlParsed} = pageContext
+    console.log("parsed URL", urlParsed)
+    const {httpResponse} = pageContext
     if (!httpResponse) return next()
-    const { body, statusCode, contentType, earlyHints } = httpResponse
-    if (res.writeEarlyHints) res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) })
+    const {body, statusCode, contentType, earlyHints} = httpResponse
+    if (res.writeEarlyHints) res.writeEarlyHints({link: earlyHints.map((e) => e.earlyHintLink)})
     res.status(statusCode).type(contentType).send(body)
   })
 

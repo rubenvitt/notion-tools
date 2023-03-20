@@ -1,19 +1,31 @@
-import { renderToString } from '@vue/server-renderer'
-import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr'
-import { createApp } from './app'
+import {renderToString} from '@vue/server-renderer'
+import {dangerouslySkipEscape, escapeInject} from 'vite-plugin-ssr'
+import {createApp} from './app'
 import logoUrl from './logo.svg'
-import type { PageContextServer } from './types'
+import type {PageContextServer} from './types'
 
-export { render }
+export {render}
 // See https://vite-plugin-ssr.com/data-fetching
 export const passToClient = ['pageProps', 'urlPathname']
+
+export const onBeforeRender = async (pageContext: PageContextServer) => {
+  console.log('onBeforeRender')
+  // log object without functions
+  console.log('params, query, urlOriginal, urlParsed, pageContext.params', {
+    // @ts-ignore
+    params: pageContext.params,
+    query: pageContext.query,
+    urlOriginal: pageContext.urlOriginal,
+    urlParsed: pageContext.urlParsed,
+  })
+}
 
 async function render(pageContext: PageContextServer) {
   const app = createApp(pageContext)
   const appHtml = await renderToString(app)
 
   // See https://vite-plugin-ssr.com/head
-  const { documentProps } = pageContext.exports
+  const {documentProps} = pageContext.exports
   const title = (documentProps && documentProps.title) || 'Vite SSR app'
   const desc = (documentProps && documentProps.description) || 'App using Vite + vite-plugin-ssr'
 

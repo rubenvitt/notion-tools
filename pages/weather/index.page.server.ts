@@ -9,6 +9,7 @@ export async function onBeforeRender(pageContext: PageContextServer) {
     const city = pageContext.routeParams.city
     const latitude = pageContext.routeParams.lat
     const longitude = pageContext.routeParams.lon
+    const search = pageContext.urlParsed
 
     if (!latitude || !longitude) {
 
@@ -41,7 +42,7 @@ export async function onBeforeRender(pageContext: PageContextServer) {
     const weather: WeatherDto = await weatherResponse.data
     const sunrise: SunriseDto = await sunriseResponse.data
 
-    const pageProps = {weather, sunrise, city}
+    const pageProps = {weather, sunrise, city, search}
     return {
         pageContext: {
             pageProps
