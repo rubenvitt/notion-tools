@@ -34,6 +34,7 @@ async function startServer() {
       query: req.query,
       params: req.params,
     }
+    console.log("req.params, req.query, req.url", req.params, req.query, req.url)
     const pageContext = await renderPage(pageContextInit)
     console.log("pageContext.params", pageContext.params)
     // @ts-ignore
