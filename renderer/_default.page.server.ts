@@ -11,7 +11,6 @@ export const passToClient = ['pageProps', 'urlPathname']
 export const onBeforeRender = async (pageContext: PageContextServer) => {
   console.log('onBeforeRender')
   // log object without functions
-  console.log(JSON.parse(JSON.stringify(pageContext)))
   console.log('params, query, urlOriginal, urlParsed, pageContext.params', {
     // @ts-ignore
     params: pageContext.params,
