@@ -35,10 +35,10 @@ async function startServer() {
       params: req.params,
     }
     const pageContext = await renderPage(pageContextInit)
-    console.log(pageContext.params)
+    console.log("pageContext.params", pageContext.params)
     // @ts-ignore
     const {urlParsed} = pageContext
-    console.log(urlParsed)
+    console.log("parsed URL", urlParsed)
     const {httpResponse} = pageContext
     if (!httpResponse) return next()
     const {body, statusCode, contentType, earlyHints} = httpResponse
