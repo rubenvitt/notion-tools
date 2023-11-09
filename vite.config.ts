@@ -5,7 +5,11 @@ import ssr from 'vike/plugin'
 import {vitePluginSsrVercelPlugin} from "@vite-plugin-vercel/vike";
 
 const config: UserConfig = {
-    plugins: [vue(), ssr({prerender: true}), vercel(), vitePluginSsrVercelPlugin()],
+    plugins: [vue(), ssr({
+        prerender: {
+            partial: true
+        }
+    }), vercel(), vitePluginSsrVercelPlugin()],
 }
 
 export default config
