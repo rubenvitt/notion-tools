@@ -38,7 +38,7 @@ weather.properties.timeseries.forEach((data: ForecastData) => {
 <template>
   <!-- use template from above -->
   <div v-if="weather && sunrise">
-    <div class="flex mt-4 mb-2">
+    <div class="flex pt-4 pb-2">
       <div class="flex-1">
         <div class="text-gray-600 text-sm dark:text-gray-400">{{ city }}</div>
         <div class="text-3xl font-bold text-gray-800 dark:text-gray-300">
