@@ -31,7 +31,7 @@ export async function onBeforeRender(pageContext: PageContextServer) {
                 'User-Agent': 'notion-tools'
             }
         }),
-        axios.get(`https://api.met.no/weatherapi/sunrise/2.0/.json?lat=${latitude}&lon=${longitude}&date=2023-03-07&offset=00:00`, {
+        axios.get(`https://api.met.no/weatherapi/sunrise/3.0/sun?lat=${latitude}&lon=${longitude}&date=2023-03-07&offset=+00:00`, {
             headers: {
                 'User-Agent': 'notion-tools'
             }

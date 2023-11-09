@@ -1,12 +1,11 @@
 <template>
-  <h1>Welcome</h1>
-  This page is:
-  <ul>
-    <li>Rendered to HTML.</li>
-    <li>Interactive. <Counter /></li>
-  </ul>
+  <div class="bg-amber-600 h-full text-white pt-12 text-center">
+    <h1 class="text-4xl">Notion Tools</h1>
+    <p>
+      Nothing to see here 👀
+    </p>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import Counter from './Counter.vue'
 </script>
