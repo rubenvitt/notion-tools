@@ -4,7 +4,7 @@ import vercel from 'vite-plugin-vercel'
 import {UserConfig} from 'vite'
 
 const config: UserConfig = {
-  plugins: [vue(), vercel(), ssr()],
+  plugins: [vue(), ssr(), vercel()],
 }
 
 export default config
