@@ -1,5 +1,6 @@
 import moment from 'moment';
 import Image from "next/image";
+import {unstable_cache} from "next/cache";
 
 const MAX_DAYS = 5;
 
@@ -39,6 +40,8 @@ export default async function WeatherPage({searchParams: {city, lon, lat}}: {
         });
         return response.json();
     }
+
+    const cachedWeather = unstable_cache(fetchWeather, [`weather-${lat}-${lon}`], {revalidate: 600});
 
     const weather = await fetchWeather();
 
