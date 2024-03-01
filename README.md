@@ -4,7 +4,7 @@ This project contains some additions with real data which can be embedded in Not
 
 ## Endpoints
 
-`/weather/{placename}/{lat}/{lon}` returns a weather widget for the specified place ready to use in Notion, respects
+`/weather?lon={lon}&lan={lan}&city={city}` returns a weather widget for the specified place ready to use in Notion, respects
 dark / light mode.
 
 ## Development
